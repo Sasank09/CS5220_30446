@@ -19,8 +19,49 @@ Thread 153 added up from 0 to 1148551: 659585274076
  */
 package com.example.ch32_multithreading_parallel_javafx;
 
-public class ThreadFun_8 {
-    public static void main(String[] args) {
+import java.util.Random;
 
+public class ThreadFun_8 {
+    public static void main(String[] args) throws InterruptedException {
+        long startTime = System.currentTimeMillis();
+
+        //create an array of 1000 numbers
+        Thread[] bunchOfThreads = new Thread[1000];
+        Random random = new Random();
+
+        //for loop to initialize the threads
+        for (int i = 0; i < 1000; i++) {
+            int x = random.nextInt(10000000);
+            bunchOfThreads[i] = new Thread(new SumIt(x, i));
+        }
+
+        for (int i = 0; i < 1000; i++) {
+            bunchOfThreads[i].start();
+        }
+        for (int i = 0; i < 1000; i++) {
+            bunchOfThreads[i].join();
+        }
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("\n***** Parallel time with " + Runtime.getRuntime().availableProcessors() + " processors is " + (endTime - startTime) + " milliseconds");
+    }
+}
+
+class SumIt implements Runnable {
+    long endValue;
+    int threadNum;
+
+    public SumIt(long x, int threadNum) {
+        this.endValue = x;
+        this.threadNum = threadNum;
+    }
+
+    @Override
+    public void run() {
+        long total = 0;
+        for (int i = 0; i < endValue; i++) {
+            total += 1;
+        }
+        System.out.println("Thread "+threadNum+" added up from 0 to "+endValue +": "+total);
     }
 }

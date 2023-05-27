@@ -11,7 +11,8 @@ public class ExecutorDemo {
     executor.execute(new PrintChar('a', 100));
     executor.execute(new PrintChar('b', 100));
     executor.execute(new PrintNum(100));
-
+    executor.execute(new PrintChar('S', 100));
+    executor.execute(new PrintChar('W', 100));
     // Shut down the executor
     executor.shutdown();
   }

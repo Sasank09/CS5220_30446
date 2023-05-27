@@ -57,8 +57,13 @@ class Task7 implements Runnable{
     @Override
     public void run(){
         for (int i = 0; i < number; i++){
-            if(word.equals("sunshine"))
-                Thread.yield();
+            if(word.equals("sunshine")) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             System.out.println(word);
         }
         System.out.println(word + " Task is FINISHED!\n");

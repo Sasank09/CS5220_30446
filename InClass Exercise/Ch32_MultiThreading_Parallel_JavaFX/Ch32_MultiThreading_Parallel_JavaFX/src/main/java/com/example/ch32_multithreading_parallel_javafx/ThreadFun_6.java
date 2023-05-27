@@ -50,18 +50,22 @@ public class ThreadFun_6 {
     }
 }
 
-class Task6 implements Runnable{
+class Task6 implements Runnable {
     String word;
     int number;
-    public Task6(String word, int number){
+
+    public Task6(String word, int number) {
         this.word = word;
         this.number = number;
     }
 
     @Override
-    public void run(){
-        for (int i = 0; i < number; i++){
+    public void run() {
+        for (int i = 0; i < number; i++) {
             System.out.println(word);
+            if (word.equals("sunshine")) {
+                Thread.yield();
+            }
         }
         System.out.println(word + " Task is FINISHED!\n");
     }
