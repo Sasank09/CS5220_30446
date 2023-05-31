@@ -44,8 +44,9 @@ public class ThreadSynchronization {
         /**
          * To work without synchronized remove the keyword synchronized below.
          * Synchronized keyword locks the resources to a thread so that no other thread can access it at a time
-         * returns 1000 when synchronized else some random value.
+         * returns 1000 when synchronized keyword used, else some random value.
          */
+        //public static void addByOne() {
         public static synchronized void addByOne() {
             System.out.println(sum);
             sum = sum + 1;

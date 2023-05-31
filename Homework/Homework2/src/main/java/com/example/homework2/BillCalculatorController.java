@@ -1,3 +1,4 @@
+//Controller class for BillCalculator Application - to handle logic
 package com.example.homework2;
 
 import javafx.event.ActionEvent;
@@ -18,7 +19,7 @@ public class BillCalculatorController {
     @FXML
     private TextField amountValue;
 
-
+    // On click event of Calculate button to find total amount due.
     @FXML
     void onClickCalculate(ActionEvent event) {
         try {
@@ -29,7 +30,7 @@ public class BillCalculatorController {
                 if(amountValue.getText()!="") {
                     amountValue.clear();
                 }
-                amountValue.setText("$"+String.valueOf(total));
+                amountValue.setText(String.format("$%.2f",total));
             }
             else {
                 amountValue.clear();
@@ -43,6 +44,7 @@ public class BillCalculatorController {
         }
     }
 
+    //Alert popup message for exception handling
     @FXML
     void displayErrorMessage() {
         Alert alert = new Alert(Alert.AlertType.ERROR);

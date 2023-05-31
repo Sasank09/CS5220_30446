@@ -1,9 +1,29 @@
+/**
+ *Create a GUI program that will prompt the
+ * user for name, age, height, and weight. When the user clicks the Calculate button the
+ * textboxes for BMI and Status are populated. Refer to image below. Class BMI.java has
+ * been provided. Refer to the LoanCalculator.java (Ch 15) example as a starting point.
+ * BMI.java has been provided.
+ * Suggested steps:
+ * 1. Run LoanCalculator.java and review the code.
+ * 2. Add BMI.java to your project
+ * 3. Create BMICalculator.java as a JavaFX application
+ * 4. Create the GUI elements as static, labels, textboxes, button
+ * 5. Wire up the button so that when clicked the age, height, and weight textfields are
+ * read
+ * 6. Create BMI object from the numeric values.
+ * 7. Populate BMI textfield and Status textfield by invoking the appropriate methods
+ * on the BMI object.
+ * @Author: Venkata Lakshmi Sasank Tipparaju(700738838)
+ */
 package com.example.homework2;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +39,7 @@ public class BMICalculator extends Application {
     private static TextField tfStatus = new TextField();
     private static Button btCalculate = new Button("Calculate");
 
+    // Override the start method in the Application class
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) {
         // Create UI
@@ -62,21 +83,40 @@ public class BMICalculator extends Application {
     }
 
     private void calculateBMI() {
+        try{
         // Get values from text fields
         String name = tfName.getText();
         double height = Double.parseDouble(tfHeight.getText());
         double weight = Double.parseDouble(tfWeight.getText());
         int age = Integer.parseInt(tfAge.getText());
 
-        // Create a loan object. Loan defined in Listing 10.2
+        // Create a BMI object.
         BMI bmiObject = new BMI(name,age,weight,height);
 
-        // Display monthly payment and total payment
-        tfBMI.setText(String.format("%.2f",
-                bmiObject.getBMI()));
+        // Display BMI and Status
+        tfBMI.setText(String.format("%.2f", bmiObject.getBMI()));
         tfStatus.setText(bmiObject.getStatus());
+        }
+        catch (Exception ex){
+            tfBMI.clear();
+            tfStatus.clear();
+            displayErrorMessage();
+        }
     }
 
+
+    @FXML
+    void displayErrorMessage() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Occurred");
+        alert.setHeaderText("Please check your input!!");
+        alert.showAndWait();
+    }
+
+    /**
+     * The main method is only needed for the IDE with limited
+     * JavaFX support. Not needed for running from the command line.
+     */
     public static void main(String[] args) {
         launch(args);
     }

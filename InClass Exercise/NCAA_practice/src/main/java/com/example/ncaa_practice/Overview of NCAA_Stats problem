@@ -1,0 +1,13 @@
+cbb18_19mini.csv contains statistics from the NCAA Men's 2018 and 2019 years
+
+In this problem we are going to do the following:
+1. Run ncaa.sql in MySQL Workbench to create a database.
+2. Write a Java program that will connect to the database and read in the data
+   for the cbb18_19mini.csv.
+3. Write a JavaFX program that will allow a user to select year (2018 or 2019) and Conference
+   The program will then display the teams in the conference and the champion, and
+   teams who were in the final 4 for the particular year
+
+
+   Data was retrieved from this website https://www.kaggle.com/andrewsundberg/college-basketball-dataset?select=cbb18.csv,
+   with Public Domain permission

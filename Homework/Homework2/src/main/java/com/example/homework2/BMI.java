@@ -1,3 +1,4 @@
+//BMI Class for BMI Calculator - to perform calculations
 package com.example.homework2;
 
 public class BMI {
@@ -8,6 +9,7 @@ public class BMI {
     public static final double KILOGRAMS_PER_POUND = 0.45359237;
     public static final double METERS_PER_INCH = 0.0254;
 
+    //constructor
     public BMI(String name, int age, double weight, double height) {
         this.name = name;
         this.age = age;
@@ -19,12 +21,14 @@ public class BMI {
         this(name, 20, weight, height);
     }
 
+    //get BMI based on height and weight
     public double getBMI() {
         double bmi = weight * KILOGRAMS_PER_POUND /
                 ((height * METERS_PER_INCH) * (height * METERS_PER_INCH));
         return Math.round(bmi * 100) / 100.0;
     }
 
+    //get status based on BMI Value
     public String getStatus() {
         double bmi = getBMI();
         if (bmi < 18.5)

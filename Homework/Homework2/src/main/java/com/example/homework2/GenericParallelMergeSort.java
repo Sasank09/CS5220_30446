@@ -132,7 +132,6 @@ public class GenericParallelMergeSort {
 
                 // Merge firstHalf with secondHalf into list
                 merge(firstHalf, secondHalf, list);
-                System.out.println("HEY" + Arrays.toString(list));
             }
         }
     }

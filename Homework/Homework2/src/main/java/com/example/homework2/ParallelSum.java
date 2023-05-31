@@ -23,15 +23,16 @@ public class ParallelSum {
         Arrays.fill(list, 1.0);
 
         long startTime = System.currentTimeMillis();
-        System.out.println("\nThe Parallel Sum of all elements in double array is " + parallelSum(list));
+        System.out.println("\nThe Sequential Sum of all elements in double array is " + sequentialSum(list));
         long endTime = System.currentTimeMillis();
-        System.out.println("Parallel Time with Number of processors " + Runtime.getRuntime().availableProcessors()+ " is " + (endTime - startTime) + " milliseconds");
+        System.out.println("Sequential Time with Number of processors " + Runtime.getRuntime().availableProcessors()+ " is " + (endTime - startTime) + " milliseconds");
 
         startTime = System.currentTimeMillis();
-        System.out.println("\nThe Sequential Sum of all elements in double array is " + sequentialSum(list));
+        System.out.println("\nThe Parallel Sum of all elements in double array is " + parallelSum(list));
         endTime = System.currentTimeMillis();
-        System.out.println("Sequential Time with Number of processors " + Runtime.getRuntime().availableProcessors()+ " is " + (endTime - startTime) + " milliseconds");
-    }
+        System.out.println("Parallel Time with Number of processors " + Runtime.getRuntime().availableProcessors()+ " is " + (endTime - startTime) + " milliseconds");
+
+        }
 
     public static Double sequentialSum(double[] list) {
         double totalValue = 0.0;
@@ -41,6 +42,7 @@ public class ParallelSum {
         return totalValue;
     }
 
+    //Initialize and invoke tasks - Divide and merge by adding up sum
     public static Double parallelSum(double[] list) {
         RecursiveTask<Double> task = new SummationTask(list, 0, list.length);
         ForkJoinPool pool = new ForkJoinPool();
@@ -48,7 +50,7 @@ public class ParallelSum {
     }
 
     private static class SummationTask extends RecursiveTask<Double> {
-        private final static int THRESHOLD = 500;
+        private final static int THRESHOLD = 10;
         private double[] list;
         private int low;
         private int high;
@@ -79,9 +81,7 @@ public class ParallelSum {
                 double rightAns = ((SummationTask) right).compute();
                 double leftAns = left.join();
 
-
-                System.out.println("Sum for the current task: "+(leftAns+rightAns));
-
+//                System.out.println("Sum for the current task: "+(leftAns+rightAns));
                 return leftAns+rightAns;
             }
         }
