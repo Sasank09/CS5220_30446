@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<Scene xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="com.example.homework2.BillCalculatorController">
+    <AnchorPane prefHeight="175" prefWidth="285">
+        <children>
+            <GridPane alignment="CENTER" focusTraversable="true" layoutY="20.0" prefHeight="154.0" prefWidth="282.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" />
+                    <RowConstraints minHeight="10.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+                    <Label fx:id="itemPrice" text="Item Price:" />
+                    <Label fx:id="quantity" text="Quantity Purchased:" GridPane.rowIndex="1" />
+                    <Label fx:id="totalAmount" text="Amount Due:" GridPane.rowIndex="2" />
+                    <TextField fx:id="itemPriceValue" promptText="Only Decimals" GridPane.columnIndex="1" />
+                    <TextField fx:id="quantityValue" promptText="Only Decimals" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="amountValue" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button fx:id="calculateBtn" mnemonicParsing="false" onAction="#onClickCalculate" text="Calculate" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                        <GridPane.margin>
+                            <Insets top="3.0" />
+                        </GridPane.margin>
+                    </Button>
+                </children>
+                <padding>
+                    <Insets left="7.0" right="7.0" />
+                </padding>
+                <opaqueInsets>
+                    <Insets top="5.0" />
+                </opaqueInsets>
+            </GridPane>
+        </children>
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+    </AnchorPane>
+</Scene>

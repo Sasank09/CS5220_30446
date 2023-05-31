@@ -22,10 +22,10 @@ public class ThreadFun_9 {
         Random random = new Random();
 
         //for loop to initialize the threads
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             int x = random.nextInt(10000000);
 //            bunchOfThreads[i] = new Thread(new SumIt2(x, i));
-            executor.execute(new SumIt2(x,i));
+            executor.execute(new SumIt2(x, i));
         }
 
 //
@@ -38,7 +38,7 @@ public class ThreadFun_9 {
 
         executor.shutdown();
 
-        while (!executor.isTerminated()){
+        while (!executor.isTerminated()) {
 
         }
 
@@ -62,6 +62,6 @@ class SumIt2 implements Runnable {
         for (int i = 0; i < endValue; i++) {
             total += 1;
         }
-        System.out.println("Thread "+threadNum+" added up from 0 to "+endValue +": "+total);
+        System.out.println("Thread " + threadNum + " added up from 0 to " + endValue + ": " + total);
     }
 }
