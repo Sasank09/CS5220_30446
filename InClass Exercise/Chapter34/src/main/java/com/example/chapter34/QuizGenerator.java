@@ -40,11 +40,11 @@ public class QuizGenerator {
         try {
             readTest(chapters);
 
-            //initializeJdbc();
+            initializeJdbc();
 
             int questionNo = 1;
             for (Quiz question : chapters) {
-                //storeQuiz(questionNo++, question);
+                storeQuiz(questionNo++, question);
                 System.out.println(question.question);
             }
 
@@ -58,7 +58,7 @@ public class QuizGenerator {
         // Create a buffered reader for reading questions from a file
         BufferedReader in = new BufferedReader(new FileReader(
                 "src/main/java/com/example/chapter34/Quiz.txt"));
-                //"src/Quiz.txt"));
+        //"src/Quiz.txt"));
 
         // Quiz count
         int questionCount = 0;
@@ -110,13 +110,10 @@ public class QuizGenerator {
                 question.question += spaces;
                 question.question += line;
             } else {
-                if (beginningOfQuiz && Character.isDigit(line.charAt(0)) &&
-                        line.charAt(1) == '.') {
+                if (beginningOfQuiz && Character.isDigit(line.charAt(0)) && line.charAt(1) == '.') {
                     question.question += line.substring(2);
                     beginningOfQuiz = false;
-                } else if (beginningOfQuiz && Character.isDigit(line.charAt(0)) &&
-                        Character.isDigit(line.charAt(1))
-                        && line.charAt(2) == '.') {
+                } else if (beginningOfQuiz && Character.isDigit(line.charAt(0)) && Character.isDigit(line.charAt(1)) && line.charAt(2) == '.') {
                     question.question += line.substring(3);
                     beginningOfQuiz = false;
                 } else {
@@ -132,13 +129,36 @@ public class QuizGenerator {
     /**
      * Initialize database connection
      */
-    private void initializeJdbc() {
+    private void initializeJdbc() throws ClassNotFoundException, SQLException {
 
+        //load the class
+        // Load the JDBC driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+//      Class.forName("oracle.jdbc.driver.OracleDriver");
+        System.out.println("Driver loaded");
+
+        // Establish a connection
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/javabook", "root", "root");
+
+        System.out.println("Database connected");
+
+        this.pstmt1 = connection.prepareStatement("insert into Quiz " +
+                "(questionId, question, choicea, choiceb, choicec, choiced," +
+                "answer)" + "values(?,?,?,?,?,?,?)");
+
+        System.out.println(this.pstmt1);
 
     }
 
-    private void storeQuiz(int questionNo,
-                           Quiz question){
+    private void storeQuiz(int questionNo, Quiz question) throws SQLException {
+        this.pstmt1.setInt(1, questionNo);
+        this.pstmt1.setString(2, question.question);
+        this.pstmt1.setString(3, question.choicea);
+        this.pstmt1.setString(4, question.choiceb);
+        this.pstmt1.setString(5, question.choicec);
+        this.pstmt1.setString(6, question.choiced);
+        this.pstmt1.setString(7, question.answer);
+        this.pstmt1.execute();
 
     }
 

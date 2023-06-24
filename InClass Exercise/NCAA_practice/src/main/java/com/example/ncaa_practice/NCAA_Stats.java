@@ -120,7 +120,8 @@ public class NCAA_Stats extends Application {
             //get teams in a particular conference
             queryString = "select team from ncaa_stats"+
                     " where conf ='" + confName + "'" +
-                    " and year = " + y;
+                    " and " +
+                    " = " + y;
 
             //Get the champ for a particular year
             champString = "select team from ncaa_stats"+

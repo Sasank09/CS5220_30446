@@ -25,6 +25,13 @@ public class SimpleJDBC {
             System.out.println(rs.getString(1) + "\t" +
                     rs.getString(2) + "\t" + rs.getString(3));
 
+        String qs1 = "select capital, state from statecapital";
+        rs = statement.executeQuery(qs1);
+        System.out.println("---------------------------");
+        System.out.println("Captial \t State");
+        while (rs.next()) {
+            System.out.println(rs.getString(1)+"\tz\t"+rs.getString(2));
+        }
         //Close the connection
         connection.close();
     }
